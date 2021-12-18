@@ -1,5 +1,6 @@
 package jpabook.jpashop;
 
+import jpabook.jpashop.domain.Member;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class MemberRepositoryTest {
     public void testMember(){
         //given
         Member member = new Member();
-        member.setUsername("memberA");
+        member.setName("memberA");
 
         //when
         Long savedId = memberRepository.save(member);
@@ -29,7 +30,7 @@ public class MemberRepositoryTest {
 
         //then
         assertThat(member.getId()).isEqualTo(findMember.getId());
-        assertThat(member.getUsername()).isEqualTo(findMember.getUsername());
+        assertThat(member.getName()).isEqualTo(findMember.getName());
         assertThat(findMember).isEqualTo(member);
     }
 }
