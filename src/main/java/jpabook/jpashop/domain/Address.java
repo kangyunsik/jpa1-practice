@@ -2,9 +2,13 @@ package jpabook.jpashop.domain;
 
 import lombok.Getter;
 
+import javax.persistence.Access;
 import javax.persistence.Embeddable;
 
+import static javax.persistence.AccessType.FIELD;
+
 @Embeddable
+@Access(FIELD)
 @Getter
 public class Address {
 
