@@ -2,15 +2,18 @@ package jpabook.jpashop.domain;
 
 import jpabook.jpashop.domain.item.Item;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
-import static javax.persistence.FetchType.*;
+import static javax.persistence.FetchType.LAZY;
+import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor(access = PROTECTED)
 public class OrderItem {
 
     @Id @GeneratedValue
