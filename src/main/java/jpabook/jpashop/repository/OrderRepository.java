@@ -11,7 +11,6 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 @Repository
 @RequiredArgsConstructor
@@ -89,5 +88,13 @@ public class OrderRepository {
         return em.createQuery("select o from Order o" +
                 " join fetch o.member m " +
                 " join fetch o.delivery d", Order.class).getResultList();
+    }
+
+    public List<OrderSimpleQueryDto> findOrderDtos() {
+        return em.createQuery("select new jpabook.jpashop.repository.OrderSimpleQueryDto(o.id, m.name, o.orderDate, o.status, o.delivery.address) from Order o" +
+                " join o.member m " +
+                " join o.delivery d", OrderSimpleQueryDto.class)
+                .getResultList();
+
     }
 }

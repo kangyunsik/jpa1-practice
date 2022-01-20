@@ -1,5 +1,6 @@
 package jpabook.jpashop.api;
 
+import jpabook.jpashop.repository.OrderSimpleQueryDto;
 import jpabook.jpashop.domain.Address;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderStatus;
@@ -44,18 +45,23 @@ public class OrderSimpleApiController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping("/api/v4/simple-orders")
+    public List<OrderSimpleQueryDto> ordersV4() {
+        return orderRepository.findOrderDtos();
+    }
+
     @Data
     static class SimpleOrderDto {
         private Long orderId;
         private String name;
-        private LocalDateTime orderTime;
+        private LocalDateTime orderDate;
         private OrderStatus orderStatus;
         private Address address;
 
         public SimpleOrderDto(Order order) {
             orderId = order.getId();
             name = order.getMember().getName();
-            orderTime = order.getOrderDate();
+            orderDate = order.getOrderDate();
             orderStatus = order.getStatus();
             address = order.getDelivery().getAddress();
         }
