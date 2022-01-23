@@ -4,7 +4,6 @@ import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
@@ -87,8 +86,9 @@ public class OrderRepository {
 
     public List<Order> findAllWithMemberDelivery() {
         return em.createQuery("select o from Order o" +
-                " join fetch o.member m " +
-                " join fetch o.delivery d", Order.class).getResultList();
+                        " join fetch o.member m " +
+                        " join fetch o.delivery d", Order.class)
+                .getResultList();
     }
 
     public List<OrderSimpleQueryDto> findOrderDtos() {
@@ -111,4 +111,14 @@ public class OrderRepository {
                 .getResultList();
     }
 
+    public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+        return em.createQuery(
+                        "select o from Order o" +
+                                " join fetch o.member m " +
+                                " join fetch o.delivery d", Order.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+
+    }
 }
