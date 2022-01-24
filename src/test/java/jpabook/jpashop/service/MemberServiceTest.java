@@ -32,7 +32,7 @@ public class MemberServiceTest {
         memberService.join(member);
         
         // THEN
-        assertEquals(member, memberRepository.findOne(member.getId()));
+        assertEquals(member, memberRepository.findById(member.getId()).get());
     }
 
     @Test
